@@ -5,7 +5,11 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/2.4/manual/en/scripting/life-cycle-callbacks.html
 
-import { _decorator, Component, Node, debug, DebugMode, log, find } from 'cc';
+import { _decorator, Component, Node, debug, DebugMode, log, find, System, sys } from 'cc';
+
+
+
+
 const { ccclass, property } = _decorator;
 
 
@@ -30,45 +34,78 @@ export default class Yodo1Ads extends Component {
 
     public setCOPPA (isEnabled)
     {
+        if(sys.isNative && (sys.os == sys.OS.IOS || sys.os == sys.OS.OSX)){
+            jsb.reflection.callStaticMethod("Yodo1Ads", "setCOPPA:", isEnabled);
+       }
+       else
         jsb.reflection.callStaticMethod("com/cocos/game/AppActivity", "setCOPPA", "(Z)V",isEnabled);
     }
 
     public setGDPR (isEnabled)
     {
+        if(sys.isNative && (sys.os == sys.OS.IOS || sys.os == sys.OS.OSX)){
+            jsb.reflection.callStaticMethod("Yodo1Ads", "setGDPR:", isEnabled);
+       }
+       else
         jsb.reflection.callStaticMethod("com/cocos/game/AppActivity", "setGDPR", "(Z)V",isEnabled);
     }
 
     public setCCPA (isEnabled)
     {
+        if(sys.isNative && (sys.os == sys.OS.IOS || sys.os == sys.OS.OSX)){
+            jsb.reflection.callStaticMethod("Yodo1Ads", "setCCPA:", isEnabled);
+       }
+       else
         jsb.reflection.callStaticMethod("com/cocos/game/AppActivity", "setCCPA", "(Z)V",isEnabled);
     }
 
 
     public initializeMasSdk (appkey,isEnabled)
     {
+        if(sys.isNative && (sys.os == sys.OS.IOS || sys.os == sys.OS.OSX)){
+            jsb.reflection.callStaticMethod("Yodo1Ads", "initializeSdkWithAppKey:isEnabled:", appkey, isEnabled);
+
+        }
+        else
         jsb.reflection.callStaticMethod("com/cocos/game/AppActivity", "initializeSdk", "(Ljava/lang/String;Z)V",appkey,isEnabled);
     }
 
     public initializeInterstitialAds() 
     {
+        if(sys.isNative && (sys.os == sys.OS.IOS || sys.os == sys.OS.OSX)){
+            jsb.reflection.callStaticMethod("Yodo1Ads", "initializeInterstitialAds");
+       }
+       else
         jsb.reflection.callStaticMethod("com/cocos/game/AppActivity", "initializeInterstitialAds", '()V');
 
     }
 
     public showInterstitialAds() 
     {
+        if(sys.isNative && (sys.os == sys.OS.IOS || sys.os == sys.OS.OSX)){
+            jsb.reflection.callStaticMethod("Yodo1Ads", "showInterstitialAds");
+       }
+       else
         jsb.reflection.callStaticMethod("com/cocos/game/AppActivity", "showInterstitialAds", '()V');
 
     }
 
     public initializeRewardAds() 
     {
+        if(sys.isNative && (sys.os == sys.OS.IOS || sys.os == sys.OS.OSX)){
+            jsb.reflection.callStaticMethod("Yodo1Ads", "initializeRewardAds");
+       }
+       else
         jsb.reflection.callStaticMethod("com/cocos/game/AppActivity", "initializeRewardAds", '()V');
 
     }
 
     public showRewardAds() 
     {
+        if(sys.isNative && (sys.os == sys.OS.IOS || sys.os == sys.OS.OSX)){
+            jsb.reflection.callStaticMethod("Yodo1Ads", "showRewardAds");
+       }
+       else
         jsb.reflection.callStaticMethod("com/cocos/game/AppActivity", "showRewardAds", '()V');
 
     }
@@ -119,6 +156,7 @@ export default class Yodo1Ads extends Component {
     // Rewarded Ad events. 
 
     public onRewardAdLoaded() {
+       
         
     }
 
@@ -143,8 +181,7 @@ export default class Yodo1Ads extends Component {
 
     public onRewardAdEarned() {
        // Reward user here
-       log("Yodo1 cocos reward user ======");
-       
+     
 
     }
 
@@ -173,3 +210,8 @@ export default class Yodo1Ads extends Component {
    
 
 }
+
+(window as any).Yodo1Ads = Yodo1Ads;
+
+
+
